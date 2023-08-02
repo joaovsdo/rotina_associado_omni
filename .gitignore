@@ -1,2 +1,3 @@
 #ignore excel folders
 data
+app/__pycache__

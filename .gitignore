@@ -1,3 +1,4 @@
 #ignore excel folders
 data
 app/__pycache__
+app/sql/conf/config.py

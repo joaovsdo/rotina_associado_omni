@@ -2,3 +2,6 @@
 data
 app/__pycache__
 app/sql/conf/config.py
+.tool-versions
+app/sql/conf/__pycache__/
+app/sql/models/__pycache__/

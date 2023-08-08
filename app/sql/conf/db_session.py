@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.future.engine import Engine
 from models.model_base import ModelBase
 
-from config import (DB_USERNAME, DB_PASSWORD, 
+from conf.config import (DB_USERNAME, DB_PASSWORD, 
                     DB_HOST, DB_PORT, DB_NAME)
 
 __engine: Optional[Engine] = None
@@ -23,7 +23,7 @@ def create_engine() -> Engine:
         return
     else:
         conn_str = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
-        __engine = sa.create_engine(url=conn_str, echo=False)
+        __engine = sa.create_engine(url=conn_str, echo=True)
 
     return __engine
 
@@ -49,5 +49,6 @@ def create_table() -> None:
         create_engine()
 
     import models.__all_models
+    ModelBase.metadata.drop_all(__engine)
     ModelBase.metadata.create_all(__engine)
 

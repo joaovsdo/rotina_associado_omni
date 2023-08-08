@@ -14,6 +14,7 @@ coordinators_supervisors = sa.Table(
     sa.Column('supervisors_id', sa.BigInteger, sa.ForeignKey('supervisors.id'))
 )
 
+
 class Coordinator(ModelBase):
     __tablename__: str = 'coordinators'
 

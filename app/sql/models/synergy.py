@@ -6,14 +6,13 @@ from typing import List
 from models.model_base import ModelBase
 from models.cell import Cell
 
-"""
-"""
 cells_synergies = sa.Table(
     'cells_synergies',
     ModelBase.metadata,
     sa.Column('id_synergy', sa.Integer, sa.ForeignKey('synergies.id')),
     sa.Column('id_cell', sa.Integer, sa.ForeignKey('cells.id'))
 )
+
 
 class Synergy(ModelBase):
     __tablename__: str = 'synergies'
@@ -22,13 +21,3 @@ class Synergy(ModelBase):
 
     synergys: List[Cell] = orm.relationship('Cell', secondary=cells_synergies, backref='cell', lazy='joined')
 
-"""
-    source_cell_id: int = sa.Column(sa.Integer, sa.ForeignKey('cells.id'))
-    source_cell: Cell = orm.relationship('Cell', lazy='joined')
-
-    destination_cell_id: int = sa.Column(sa.Integer, sa.ForeignKey('cells.id'))
-    destination_cell: Cell = orm.relationship('Cell' , lazy='joined')
-    
-
-
-"""

@@ -1,10 +1,20 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
 
-from sql.models.model_base import ModelBase
-from sql.models.synergy import Synergy
+from typing import Optional
+
+from models.email import Email
+from models.model_base import ModelBase
+from models.synergy import Synergy
 
 import datetime
+
+members_emails = sa.Table(
+    'members_emails',
+    ModelBase.metadata,
+    sa.Column('member_id', sa.Integer, sa.ForeignKey('members.id')),
+    sa.Column('email_id', sa.Integer, sa.ForeignKey('emails.id')),
+)
 
 
 class Member(ModelBase):
@@ -25,6 +35,8 @@ class Member(ModelBase):
     action: str = sa.Column(sa.String(30), unique=False, nullable=False, default='NF')
 
     # ForeignKeys of Synergy and the maping of Synergy orm object for data manipulation in the querys from python
-    id_synergy: int = sa.Column(sa.Integer, sa.ForeignKey('synergys.id'))
-    synergy: Synergy = orm.relationship('Synergy', lazy='joined')
+    id_synergy: int = sa.Column(sa.Integer, sa.ForeignKey('synergies.id'))
+    synergy: Optional[Synergy] = orm.relationship('Synergy', lazy='joined')
+
+    email: Email = orm.relationship('Email', secondary=members_emails, backref='member_email', lazy='dynamic')
 

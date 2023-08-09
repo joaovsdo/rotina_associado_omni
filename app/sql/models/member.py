@@ -1,7 +1,7 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
 
-from typing import Optional
+from typing import Optional, List
 
 from models.email import Email
 from models.model_base import ModelBase
@@ -38,5 +38,5 @@ class Member(ModelBase):
     id_synergy: int = sa.Column(sa.Integer, sa.ForeignKey('synergies.id'))
     synergy: Optional[Synergy] = orm.relationship('Synergy', lazy='joined')
 
-    email: Email = orm.relationship('Email', secondary=members_emails, backref='member_email', lazy='dynamic')
+    email: List[Email] = orm.relationship('Email', secondary=members_emails, backref='member_email', lazy='dynamic')
 

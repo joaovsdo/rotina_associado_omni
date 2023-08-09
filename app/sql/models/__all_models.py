@@ -1,7 +1,6 @@
 from models.email import Email
 from models.synergy import Synergy
 from models.reason import Reason
-from models.type import Type
 from models.cell import Cell
 from models.supervisor import Supervisor
 from models.coordinator import Coordinator
